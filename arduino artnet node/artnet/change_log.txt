@@ -1,0 +1,17 @@
+v1.13 - 18 January 2013
+
+- Unified code for Arduino MEGA and UNO, based on new (2013/01/13) code (v0.2) from Toni Merino - www.deskontrol.net/blog
+
+- UART's usage have changed. Be carefull if you are upgrade a existing unit: previous U3 (Universe 3) is now U0, previous U2 is now U1,
+  previous U1 is now U2 and previous U0 is now U3. See schematics!
+
+- 1 Universe (512 channels) with Arduino UNO
+
+- 1, 2 or 3 Universes with Arduino MEGA. 4 universes at your own risk... read info about this project!
+
+- Only 3 lines to edit to disable LCD Display funcionality
+
+
+v1.0 RC1 - 25 December 2012
+
+- First release 

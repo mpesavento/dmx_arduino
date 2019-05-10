@@ -1,0 +1,54 @@
+Arduino based DMX ArtNet-Node
+
+Or how make an Art-Net node for less than $ 60
+
+
+In this post we show you how to build an Art-Net node based on Arduino Mega with four output DMX universes.
+This node answers to the basic messages of the Art-Net protocol, so that any controller that meets the protocol
+will be able to detect it and use it as DMX output.
+
+What do we need?
+
+- A mega Arduino Mega 2560. The assembly and the code has been tested with Arduino Mega 2560,
+  should work without problems in 1280 if you use only two universes.
+- A shield-based ethernet Wiznet W5100 (Arduino ethershield)
+- The DMX shield based on included schematic.
+- Library Deskontrol 4 DMX universes v.03 (included in package)
+- Arduino IDE v0023 (The code for the Art-Net node does not work for now with higher versions)
+- Optional: Any 2x16 LCD compatible with the Hitachi HD44780 driver. Read notes at the end of this file
+
+
+Installation Instructions:
+
+Copy the folder "Dmx" included in the package to the folder arduino-0023/libraries/
+Copy the folder "artnet_node" to Arduino sketches folder, in my case "Arduino"
+Now we can open the sketch of the "artnet_node", compile the code and upload to Arduino.
+To test the performance I have used the software "MADRIX", the utility "DmxWorkshop"
+of Artistic license, and the utility "artnet-discover" that is part of the library libartnet of Simon Newton.
+All these programs are for windows, if you want to try Linux you can use "Q-light." (Configure your computer
+with the IP 2.0.0.1, subnet-mask 255.0.0.0, gateway 2.0.0.1)
+
+I hope to share your experiences in the Blog.
+
+
+*** Notes relative to the LCD display ***
+
+Use of the LCD Display is optiocional. If you don't want to it, please edit the artnet_node.pde file,
+and comment only the 3 lines at the begining of the code.
+These lines are clearly commented. Doing it frees you some memory.
+
+What are the main advantages of using the LCD display?
+
+1 - During initializacion of the device (start up) display shows you the configured IP address of the ArtNET Node.
+    This can be usefull if you forget it since last use, and want to configure your control device to unicast to
+    this ArtNET Node
+
+2 - After initialization, LCD display, permanentely shows you active universes, and the number of channels active
+    for each of the active universes according to the DMX mode sellected (512 channels for DMX512 mode,
+    1024 for DMX1024 mode, 2048 channels for DMX2048 mode).
+    As modes DMX1024 and DMX2048 are not standard, when selected for any universe, the display shows you a "!"
+    symbol before the number of active channels. 
+
+Important: If you want to use the LCD Display, to avoid conflites with the Ethernet Shield,
+           connect the LCD pins (Enable and R/W) to Arduino pins 6 e 7.
+
