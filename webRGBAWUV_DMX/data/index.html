@@ -1,0 +1,14 @@
+server.send(200, "text/html", "<html><head><script>var connection = new WebSocket('ws://'+location.hostname+':81/', ['arduino']);connection.onopen = function () {  connection.send('Connect ' + new Date()); }; connection.onerror = function (error) {    console.log('WebSocket Error ', error);}; connection.onmessage = function (e) {  console.log('Server: ', e.data);}; id_array= new Array(\"addr\",\"r\",\"g\",\"b\",\"a\",\"w\",\"uv\",\"c0\",\"c1\",\"c2\",\"c3\",\"c4\"); values=new Array(id_array.length);  function prepareVar(id,position) {  for (i = 0; i < id_array.length; i++) {   var a = parseInt(document.getElementById(id_array[i]).value).toString(16);   if(a.length < 2) { a = '0' + a; }   values[i]=a; } sendVars(); }    function sendVars() { var data = '#'+values; console.log('Data: ' + data); connection.send(data); }  </script></head><body>LED Control:<br/><br/> <form> Starting address: <input id=\"addr\" type=\"number\" placeholder=\"1\" min=\"0\" max=\"512\" step=\"1\" onchange=\"prepareVar('addr',0);;\" /><br/> R: <input id=\"r\" type=\"range\" min=\"0\" max=\"255\" step=\"1\" onchange=\"prepareVar('r',1);\" oninput=\"this.form.r_in.value=this.value\" /><input id=\"r_in\" type=\"number\" min=\"0\" max=\"255\" step=\"1\" onchange=\"prepareVar('r',1);\" oninput=\"this.form.r.value=this.value\" /><br/> G: <input id=\"g\" type=\"range\" min=\"0\" max=\"255\" step=\"1\" onchange=\"prepareVar('g',2);\" oninput=\"this.form.g_in.value=this.value\" /><input id=\"g_in\" type=\"number\" min=\"0\" max=\"255\" step=\"1\" onchange=\"prepareVar('g',2);\" oninput=\"this.form.g.value=this.value\" /><br/> B: <input id=\"b\" type=\"range\" min=\"0\" max=\"255\" step=\"1\" onchange=\"prepareVar('b',3);\" oninput=\"this.form.b_in.value=this.value\" /><input id=\"b_in\" type=\"number\" min=\"0\" max=\"255\" step=\"1\" onchange=\"prepareVar('b',3);\" oninput=\"this.form.b.value=this.value\" /><br/>
+
+<br/> A: <input id=\"g\" type=\"range\" min=\"0\" max=\"255\" step=\"1\" onchange=\"prepareVar('g',2);\" oninput=\"this.form.g_in.value=this.value\" /><input id=\"g_in\" type=\"number\" min=\"0\" max=\"255\" step=\"1\" onchange=\"prepareVar('g',2);\" oninput=\"this.form.g.value=this.value\" />
+
+
+
+
+
+
+
+
+
+ </form></body></html> ");
+  });
