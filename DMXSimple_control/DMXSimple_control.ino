@@ -10,13 +10,13 @@
 ** auto-insert it if you select Sketch > Import Library > DmxSimple. */
 
 #include <DmxSimple.h>
+#include <FastLED.h>
 int maxChannels = 3;
 int use=3;
 
-//int colorMap[] = {1, 6, 2, 3, 5, 4};
-int colorMap[] = {1, 3, 2};
-
 int DELAY = 500;
+
+int colorMap[6] = {1, 6, 2, 3, 5, 4};
 
 void setup() {
   /* The most common pin for DMX output is pin 3, which DmxSimple
@@ -53,34 +53,34 @@ void loop() {
       /* Update DMX channel 1 to new brightness */
       DmxSimple.write(colorMap[channel], brightness);
       //      DmxSimple.write(channel - 1, 255 - brightness);
-
-
-      /* Small delay to slow down the ramping */
-      delay(DELAY);
-    }
-    DmxSimple.write(colorMap[channel], 0);
-    for (brightness = 0; brightness <= 255; brightness++) {
-
-      /* Update DMX channel 1 to new brightness */
-      DmxSimple.write(colorMap[(channel + 1)%use], brightness);
-      //      DmxSimple.write(channel - 1, 255 - brightness);
-
+      Serial.print(colorMap[channel]);
+      Serial.print(" ");
+      Serial.println(brightness);
 
       /* Small delay to slow down the ramping */
       delay(DELAY);
     }
-    for (brightness = 255; brightness > 0; brightness--) {
-
-      /* Update DMX channel 1 to new brightness */
-      DmxSimple.write(colorMap[channel], brightness);
-      //      DmxSimple.write(channel - 1, 255 - brightness);
-
-
-      /* Small delay to slow down the ramping */
-      delay(DELAY);
-    }
-
-    // DmxSimple.write(colorMap[channel], 0);
-
+//    DmxSimple.write(colorMap[channel], 0);
+//    for (brightness = 0; brightness <= 255; brightness++) {
+//
+//      /* Update DMX channel 1 to new brightness */
+//      DmxSimple.write(colorMap[(channel + 1)%use], brightness);
+//      //      DmxSimple.write(channel - 1, 255 - brightness);
+//
+//
+//      /* Small delay to slow down the ramping */
+//      delay(DELAY);
+//    }
+//    for (brightness = 255; brightness > 0; brightness--) {
+//
+//      /* Update DMX channel 1 to new brightness */
+//      DmxSimple.write(colorMap[channel], brightness);
+//      //      DmxSimple.write(channel - 1, 255 - brightness);
+//
+//
+//      /* Small delay to slow down the ramping */
+//      delay(DELAY);
+//    }
+//    // DmxSimple.write(colorMap[channel], 0);
   }
 }
