@@ -1,12 +1,13 @@
 import json
 from pyudmx import pyudmx
-from interactive_runner import SpotReader
+from .interactive_runner import SpotReader
 import time
+
 
 def run_multicolor_test():
     udmx = pyudmx.uDMXDevice()
     res = udmx.open()
-    print("udmx open: ", res)
+    print("pyudmx open: ", res)
     spectrometer = SpotReader()
     print("spectrometer open")
     t0 = time.time()
@@ -14,9 +15,10 @@ def run_multicolor_test():
     readings = []
     udmx.send_multi_value(2, [20, 20, 20, 0, 0, 0])
     res1 = spectrometer.read()
-    print("Sample ({})s: x/255.  LUX: {} CCT: {}K  CRI: {}".format(int(time.time() - t0),
-                                                                   res1['lux'], res1['cct'],
-                                                                  res1['cri']))
+    print("Sample ({})s: x/255.  LUX: {} CCT: {}K  CRI: {}".format(
+        int(time.time() - t0),
+        res1['lux'], res1['cct'],
+        res1['cri']))
     readings.append(res1)
 
     udmx.send_multi_value(2, [20, 20, 20, 20, 0, 0])

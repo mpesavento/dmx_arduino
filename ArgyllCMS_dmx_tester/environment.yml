@@ -1,0 +1,9 @@
+name: dmx
+dependencies:
+  - python=3.7
+  - pip>=10.0.1
+  - ipython=5.8
+  - jupyter=1.0
+  - pip:
+    # load all requirements using pip, making package deployment easier
+    - -r requirements.txt

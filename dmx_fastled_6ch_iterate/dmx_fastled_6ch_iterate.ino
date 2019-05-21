@@ -29,7 +29,8 @@ void loop() {
   }
 
   for (counter=0; counter < 64; counter++) {
-    int value = triwave8(counter) / 4;
+//    int value = triwave8(counter) / 4;
+    int value = counter;
     DmxSimple.write(1, value);
     Serial.println(value);
     delayToSyncFrameRate(FPS);
