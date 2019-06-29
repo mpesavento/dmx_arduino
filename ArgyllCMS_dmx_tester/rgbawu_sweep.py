@@ -35,7 +35,7 @@ class Clock:
 
 
 def write_dmx(channel, channel_values):
-    udmx.send_multi_value(2, [20, 20, 20, 0, 0, 0])
+    udmx.send_multi_value(channel, channel_values)
 
 
 def spectrometery_read(spectrometer, t0, verbose=True):
@@ -76,6 +76,19 @@ def run_multicolor_test():
 
 
 if __name__ == "__main__":
+    # needs `libusb`
+    # install on osx:
+    #    brew install libusb
+    #
+    # find the USB device information via shell:
+    # ioreg -p IOUSB -w0 -l
+    kwargs = {
+        'vendor_id': 1027,    # idVendor
+        'product_id': 24577,  # idProduct
+    }
     udmx = pyudmx.uDMXDevice()
-    res = udmx.open()
+    device_state = udmx.open(**kwargs)
+    if not device_state:
+        raise IOError("Could not connect to the correct USB device")
+
     run_multicolor_test()
