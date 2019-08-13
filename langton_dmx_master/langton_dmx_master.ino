@@ -87,10 +87,10 @@ void setup() {
   
 }
 
-  uint8_t hue;
-  uint8_t myValue = 0;
-  uint8_t currentHue = 0;
-  uint8_t nextHue = 1;
+uint8_t hue;
+uint8_t myValue = 0;
+uint8_t currentHue = 0;
+uint8_t nextHue = 1;
   
 // the loop routine runs over and over again forever:
 void loop() 
@@ -99,11 +99,11 @@ void loop()
   //hue = map8( 255-cos8( myValue), Hues[currentHue], Hues[nextHue]);
   hue = map( 255-cos8( myValue),0,255, Hues[currentHue], Hues[nextHue]);
   // Use FastLED automatic HSV->RGB conversion
-//Serial.print(myValue);
-//Serial.print(", ");
-//Serial.print(255-cos8( myValue));
-//Serial.print(", ");
-//  Serial.println(hue);
+  //Serial.print(myValue);
+  //Serial.print(", ");
+  //Serial.print(255-cos8( myValue));
+  //Serial.print(", ");
+  //  Serial.println(hue);
   showAnalogRGB( CHSV( hue, 255, 255) );
 
   myValue++;
